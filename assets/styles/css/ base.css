@@ -1,0 +1,259 @@
+/* Fonts */
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'eina01-bold';
+	src: url('../../fonts/eina01-bold.woff2')
+}
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'mabry-light';
+	src: url('../../fonts/mabry-light.woff2')
+}
+.EP-1 {
+    --bg-color: #F0F3FF;
+    --main-color: #1A49BA;
+    --accent-color: #0064fa;
+    --text-color: #606977;
+    --boarder-color: #e8f0ff;
+    --links-color: #115df6;
+    --nav-links: #161616;
+    --main-font: 'eina01-bold';
+    --text-font: 'mabry-light';
+}
+.button.alternative {
+  --color-hover: #0064fa;
+  --background: #0064fa;
+  --hover-back: #0064fa;
+  --hover-front: #e8f0ff;
+  --color: #fff;
+ --text-font: 'mabry-light';
+}
+.button {
+  --color-hover: var(--color);
+  font-family: var(--text-font);
+  padding: 10px 35px !important;
+  border-radius: 40px;
+  line-height: 24px;
+  font-size: 16px !important;
+  letter-spacing: 1px;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  color: var(--c, var(--color));
+  background: var(--b, var(--background));
+  -webkit-transition: color 0.2s linear var(--c-d, 0.2s), background 0.3s linear var(--b-d, 0.2s);
+  transition: color 0.2s linear var(--c-d, 0.2s), background 0.3s linear var(--b-d, 0.2s);
+    margin-left: -2%;
+    margin-top: 3% !important;
+    margin-bottom: 3%;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,0.35);
+}
+
+.button:not(.simple):before, .button:not(.simple):after {
+  content: '';
+  position: absolute;
+  background: var(--pb, var(--hover-back));
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200%;
+  border-radius: var(--br, 40%);
+  -webkit-transform: translateY(var(--y, 50%));
+          transform: translateY(var(--y, 50%));
+  -webkit-transition: border-radius 0.5s ease var(--br-d, 0.08s), -webkit-transform var(--d, 0.4s) ease-in var(--d-d, 0s);
+  transition: border-radius 0.5s ease var(--br-d, 0.08s), -webkit-transform var(--d, 0.4s) ease-in var(--d-d, 0s);
+  transition: transform var(--d, 0.4s) ease-in var(--d-d, 0s), border-radius 0.5s ease var(--br-d, 0.08s);
+  transition: transform var(--d, 0.4s) ease-in var(--d-d, 0s), border-radius 0.5s ease var(--br-d, 0.08s), -webkit-transform var(--d, 0.4s) ease-in var(--d-d, 0s);
+}
+.button:not(.simple):after {
+  --pb: var(--hover-front);
+  --d: .44s;
+}
+.button div {
+  z-index: 1;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+}
+.button div span {
+  display: block;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-animation: var(--name, none) 0.7s linear forwards 0.18s;
+          animation: var(--name, none) 0.7s linear forwards 0.18s;
+}
+.button.in {
+  --name: move;
+}
+.button.in:not(.out) {
+  --c: var(--color-hover);
+  --b: var(--background-hover);
+}
+.button.in:not(.out):before, .button.in:not(.out):after {
+  --y: 0;
+  --br: 5%;
+}
+.button.in:not(.out):after {
+  --br: 10%;
+  --d-d: .02s;
+}
+.button.in.out {
+  --name: move-out;
+}
+.button.in.out:before {
+  --d-d: .06s;
+}
+
+@-webkit-keyframes move {
+  30%,
+    36% {
+    -webkit-transform: translateY(calc(-6px * var(--move))) translateZ(0) rotate(calc(-13deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-6px * var(--move))) translateZ(0) rotate(calc(-13deg * var(--rotate) * var(--part)));
+  }
+  50% {
+    -webkit-transform: translateY(calc(3px * var(--move))) translateZ(0) rotate(calc(6deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(3px * var(--move))) translateZ(0) rotate(calc(6deg * var(--rotate) * var(--part)));
+  }
+  70% {
+    -webkit-transform: translateY(calc(-2px * var(--move))) translateZ(0) rotate(calc(-3deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-2px * var(--move))) translateZ(0) rotate(calc(-3deg * var(--rotate) * var(--part)));
+  }
+}
+
+@keyframes move {
+  30%,
+    36% {
+    -webkit-transform: translateY(calc(-6px * var(--move))) translateZ(0) rotate(calc(-13deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-6px * var(--move))) translateZ(0) rotate(calc(-13deg * var(--rotate) * var(--part)));
+  }
+  50% {
+    -webkit-transform: translateY(calc(3px * var(--move))) translateZ(0) rotate(calc(6deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(3px * var(--move))) translateZ(0) rotate(calc(6deg * var(--rotate) * var(--part)));
+  }
+  70% {
+    -webkit-transform: translateY(calc(-2px * var(--move))) translateZ(0) rotate(calc(-3deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-2px * var(--move))) translateZ(0) rotate(calc(-3deg * var(--rotate) * var(--part)));
+  }
+}
+@-webkit-keyframes move-out {
+  30%,
+    36% {
+    -webkit-transform: translateY(calc(6px * var(--move))) translateZ(0) rotate(calc(13deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(6px * var(--move))) translateZ(0) rotate(calc(13deg * var(--rotate) * var(--part)));
+  }
+  50% {
+    -webkit-transform: translateY(calc(-3px * var(--move))) translateZ(0) rotate(calc(-6deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-3px * var(--move))) translateZ(0) rotate(calc(-6deg * var(--rotate) * var(--part)));
+  }
+  70% {
+    -webkit-transform: translateY(calc(2px * var(--move))) translateZ(0) rotate(calc(3deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(2px * var(--move))) translateZ(0) rotate(calc(3deg * var(--rotate) * var(--part)));
+  }
+}
+@keyframes move-out {
+  30%,
+    36% {
+    -webkit-transform: translateY(calc(6px * var(--move))) translateZ(0) rotate(calc(13deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(6px * var(--move))) translateZ(0) rotate(calc(13deg * var(--rotate) * var(--part)));
+  }
+  50% {
+    -webkit-transform: translateY(calc(-3px * var(--move))) translateZ(0) rotate(calc(-6deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(-3px * var(--move))) translateZ(0) rotate(calc(-6deg * var(--rotate) * var(--part)));
+  }
+  70% {
+    -webkit-transform: translateY(calc(2px * var(--move))) translateZ(0) rotate(calc(3deg * var(--rotate) * var(--part)));
+            transform: translateY(calc(2px * var(--move))) translateZ(0) rotate(calc(3deg * var(--rotate) * var(--part)));
+  }
+}
+
+/***************************************** About-Section **************************************/
+#about .button.about {
+  --color-hover: #e8f0ff;
+  --background: #e8f0ff;
+  --hover-back: #e8f0ff;
+  --hover-front: #0064fa;
+  --color: #1A49BA;
+ --text-font: 'mabry-light';
+}
+#about .button {
+  --color-hover: var(--color);
+  font-family: var(--text-font);
+  color: var(--c, var(--color));
+  background: var(--b, var(--background));
+  border: 1px solid var(--accent-color) !important;
+  font-size: 2.2vh !important;
+}
+
+/***************************************** About-Section **************************************/
+#col_border .button.about {
+  --color-hover: #e8f0ff;
+  --background: #e8f0ff;
+  --hover-back: #e8f0ff;
+  --hover-front: #0064fa;
+  --color: #1A49BA;
+ --text-font: 'mabry-light';
+}
+#col_border .button {
+  --color-hover: var(--color);
+  font-family: var(--text-font);
+  color: var(--c, var(--color));
+  background: var(--b, var(--background));
+  border: 1px solid var(--accent-color) !important;
+  font-size: 2.2vh !important;
+}
+
+/********************** Extra small devices (portrait phones, less than 576px) ****************************/
+@media (max-width: 575.98px) {
+#contact-msg .button {
+    margin-left: 2%;
+}
+}
+/************************ Extra large devices (large desktops, 1200px and up) ********************************/
+@media (min-width: 1200px) {
+.button {
+    margin-top: -3%;
+    margin-left: 0%;
+    padding: 0.8em 2.75em;
+    font-size: 1.8vh;
+}
+#mainNav .button {
+    border: 1px solid var(--accent-color) !important;
+}
+#contact-msg .button {
+    text-transform: none;
+    font-size: 2.2vh;
+    font-family: var(--text-font);
+}
+#hero .button {
+    border: 1px solid var(--accent-color) !important;
+}
+#about .button {
+  font-size: 2.3vh !important;
+}   
+#col_border .button {
+  font-size: 2.3vh !important;
+}   
+    
+.modall .button {
+    border: 1px solid var(--accent-color) !important;
+    font-size: 2.3vh !important;
+    font-family: var(--text-font);
+}
+}
+
+/************************ Extra large devices (large desktops, 1200px and up) ********************************/
+@media (min-width: 1900px) {
+.button {
+    padding: 15px 35px !important;
+    font-size: 19px !important;
+}
+}

@@ -1,0 +1,741 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+html,
+body {
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+#main {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+#main.loaded {
+  opacity: 1;
+}
+a:hover {
+  text-decoration: none;
+  /*    background: url(../../fonts/eina01-bold.woff2)*/
+}
+.line {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+.line div {
+  visibility: hidden;
+}
+/* Fonts */
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Lausanne";
+  src: url("../../fonts/Lausanne-300.ttf");
+}
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Matrice-Medium";
+  src: url("../../fonts/Matrice-Medium.ddaf072d.ttf");
+}
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Montserrat-Regular";
+  src: url("../../fonts/Montserrat-Regular.ttf");
+}
+.EP-1 {
+  --bg-color: #ffffff;
+  --accent-color: #0945f8;
+  --text-color: #161616;
+  --boarder-color: #e8f0ff;
+  --main-font: "Lausanne";
+  --text-font: "Montserrat-Regular";
+  --style-font: "Matrice-Medium";
+}
+.cursor {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transform-origin: 100% 100%;
+  mix-blend-mode: exclusion;
+  z-index: 99;
+}
+.link-grow {
+  background: white;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 6px;
+}
+
+/* Grainy texture animation by Geoff Graham https://css-tricks.com/snippets/css/animated-grainy-texture/ */
+#main::before {
+  animation: grain 8s steps(10) infinite;
+  background-image: url(../../images/noise.png);
+  content: "";
+  height: 300%;
+  left: -50%;
+  opacity: 0.6;
+  position: fixed;
+  top: -100%;
+  width: 300%;
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+/****************************************** NAVIGATION ************************************/
+#mainNav {
+  transform: translateY(0);
+  transition: padding-top 0.3s, padding-bottom 0.3s;
+  padding-top: 8px;
+  padding-bottom: 0px;
+  background: transparent;
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 9;
+  width: 100vw;
+}
+#mainNav .container-fluid {
+  border-bottom: 1px solid #afafaf;
+}
+.navbar-brand img {
+  width: 120px;
+  margin-top: -15%;
+}
+.navbar-toggler {
+  position: absolute;
+  width: 40px;
+  top: 14px;
+  right: 30px;
+  padding: 5px;
+  cursor: pointer;
+  border: 0;
+  z-index: 1;
+}
+.navbar-toggler span {
+  display: block;
+  background: var(--text-color);
+  width: 30px;
+  height: 1px;
+  transition: 300ms linear all;
+}
+.navbar-toggler span:nth-child(1) {
+  width: 20px;
+  margin-left: 20px;
+}
+.navbar-toggler span:nth-child(2) {
+  width: 20px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.navbar-toggler span:nth-child(3) {
+  width: 20px;
+}
+.navbar-toggler:hover span:nth-child(1) {
+  width: 32px;
+  margin-left: 0%;
+}
+.navbar-toggler:hover span:nth-child(2) {
+  width: 32px;
+}
+.navbar-toggler:hover span:nth-child(3) {
+  width: 32px;
+  margin-left: 0%;
+}
+.navbar-brand {
+  margin-right: 0;
+}
+
+.content__item #active {
+  color: var(--accent-color);
+}
+.content__item #active:hover {
+  color: var(--accent-color);
+}
+#mainNav a:hover {
+  color: var(--nav-link);
+  outline: none;
+}
+#mainNav a:focus {
+  outline: none;
+  background: lightgrey;
+}
+#mainNav a:focus:not(:focus-visible) {
+  background: transparent;
+}
+.link {
+  cursor: pointer;
+  font-size: 15px;
+  position: relative;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+.link::before,
+.link::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
+}
+.link::before {
+  content: "";
+  /* show by default */
+}
+.link__graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--nav-links);
+  stroke-width: 1px;
+}
+.link__graphic--slide {
+  top: -3px;
+  stroke-width: 2px;
+  transition: transform 0.7s;
+  transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
+}
+.link__graphic--stroke path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.content__item {
+  padding: 7px 17px !important;
+}
+.link--carme {
+  font-size: 16px;
+  color: var(--nav-links);
+  letter-spacing: 1px;
+  font-family: var(--text-font);
+  text-decoration: none;
+  outline: none;
+}
+.link:hover .link__graphic--stroke path {
+  stroke-dashoffset: 0;
+}
+.link--carme::before {
+  display: none;
+}
+.link__graphic--scribble {
+  top: 100%;
+}
+.link__graphic--scribble path {
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.link:hover .link__graphic--scribble path {
+  transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
+  transition-duration: 0.3s;
+}
+#mainNav.navbar-shrink {
+  padding-top: 8px;
+  padding-bottom: 0px;
+}
+#mainNav.navbar-shrink {
+  position: fixed;
+  background: var(--bg-color);
+  box-shadow: -1px 9px 40px -30px rgba(0, 0, 0, 0.35);
+  width: 100%;
+}
+
+/***************************************** Hero-Section **************************************/
+#hero {
+  padding-top: 35%;
+  height: 100vh;
+}
+.wrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper .line {
+  width: 100%;
+  height: 45px;
+  position: relative;
+  overflow: hidden;
+}
+#second_line {
+  margin-left: -4%;
+  margin-top: 1%;
+}
+.wrapper .line span {
+  position: absolute;
+  font-size: 5.3vh;
+  font-family: var(--main-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  line-height: 3.5rem;
+}
+.wrapper .line span mark {
+  background: transparent;
+  color: var(--accent-color);
+}
+.hero-intro p {
+  line-height: 1.4;
+  font-size: 2.2vh;
+  font-family: var(--text-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-top: 5%;
+  margin-bottom: 9%;
+}
+.hero-intro #arrow {
+  width: 15%;
+  margin-top: 15%;
+  margin-left: 70%;
+  margin-bottom: 35%;
+}
+.hero-intro #dots {
+  width: 50%;
+}
+/***************************************** About-Section **************************************/
+#about {
+  margin-top: 15%;
+}
+.about-intro {
+  margin: 3%;
+}
+.about-intro h1 {
+  font-size: 4.5vh;
+  font-family: var(--header-font);
+  letter-spacing: 1px;
+  color: var(--accent-color);
+  margin-bottom: 15%;
+}
+.about-intro #apex_arrow {
+  width: 12%;
+  margin-left: 75%;
+  margin-bottom: 10%;
+}
+.about-intro p {
+  line-height: 1.4;
+  font-size: 2.2vh;
+  font-family: var(--text-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+}
+
+/*************************************************** ourBeliefs-section ****************************************/
+#ourBeliefs {
+  background: var(--accent-color);
+  padding-top: 10%;
+  margin-top: 5%;
+  padding-bottom: 10px;
+}
+.ourBeliefs-intro {
+  margin: 3%;
+}
+.ourBeliefs-intro h1 {
+  font-size: 6.2vh;
+  font-family: var(--header-font);
+  letter-spacing: 1px;
+  color: var(--bg-color);
+  margin-bottom: 10%;
+  line-height: 1;
+}
+.ourBeliefs-intro h1 mark {
+  font-size: 3.5vh;
+  background: transparent;
+  color: var(--bg-color);
+  padding: 4px 20px;
+  border: 1px solid var(--bg-color);
+  border-radius: 27px;
+}
+.ourBeliefs-intro h3 {
+  font-size: 2.2vh;
+  font-family: var(--style-font);
+  letter-spacing: 1px;
+  color: var(--bg-color);
+  margin-bottom: 3%;
+}
+.ourBeliefs-intro h3 span {
+  border-bottom: 1px solid var(--bg-color);
+}
+.ourBeliefs-intro p {
+  line-height: 1.4;
+  font-size: 2.2vh;
+  font-family: var(--text-font);
+  letter-spacing: 1px;
+  color: var(--bg-color);
+}
+.ourBeliefs-intro #col {
+  margin-top: 10%;
+}
+.ourBeliefs-intro hr {
+  background: var(--bg-color);
+  margin-top: 6%;
+}
+[data-scroll] {
+  transition: opacity 1s;
+}
+[data-scroll="in"] {
+  opacity: 1;
+}
+[data-scroll="out"] {
+  opacity: 0;
+}
+
+/*************************************************** Partners-section ****************************************/
+#partners {
+  margin-top: 10%;
+  margin-bottom: 13%;
+}
+.partners-intro {
+  margin: 3%;
+}
+.partners-intro h1 {
+  font-size: 6.2vh;
+  font-family: var(--header-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-bottom: 2%;
+}
+.partners-intro p {
+  line-height: 1.4;
+  font-size: 2.2vh;
+  font-family: var(--text-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-bottom: 10%;
+}
+.partners-intro .badge {
+  border: 1px solid var(--accent-color);
+  font-family: var(--text-font);
+  font-weight: normal;
+  color: var(--text-color);
+  font-size: 2.2vh;
+  letter-spacing: 1px;
+  margin-bottom: 3%;
+  text-transform: uppercase;
+}
+
+/***************************************** Info-Section **************************************/
+#info {
+  margin-top: 20%;
+}
+.info-intro {
+  margin: 3%;
+}
+.info-intro h1 {
+  font-size: 4.5vh;
+  font-family: var(--header-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-bottom: 4%;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/*************************************************** Footer-section ****************************************/
+#footer {
+  margin-top: 6%;
+}
+.footer-intro {
+  margin: 3%;
+}
+.footer-intro p {
+  font-size: 1.7vh;
+  font-family: var(--text-font);
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-bottom: 8%;
+}
+.footer-intro h3 small {
+  font-size: 1.5vh;
+  font-family: var(--style-font);
+  letter-spacing: 1px;
+  color: var(--accent-color);
+  margin-bottom: 2%;
+}
+/********************** Extra small devices (portrait phones, less than 576px) ****************************/
+@media (max-width: 575.98px) {
+  #mainNav {
+    background: var(--bg-color);
+  }
+  .link--carme {
+    margin-left: -4%;
+  }
+  .nav-item #access {
+    margin-left: -1%;
+    width: 50%;
+  }
+  .cursor {
+    display: none;
+  }
+  .ourBeliefs-intro h1 span {
+    display: block;
+  }
+  #white_arrow {
+    display: none;
+  }
+}
+/************************ Small devices (landscape phones, 576px and up) *****************************/
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+/***************************** Medium devices (tablets, 768px and up) ********************************/
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+/********************************** Large devices (desktops, 992px and up) *********************************/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+/************************ Extra large devices (large desktops, 1200px and up) ********************************/
+@media (min-width: 1200px) {
+  #mainNav {
+    padding-left: 1%;
+    margin-right: 1%;
+  }
+  .navbar-brand img {
+    width: 120px;
+    margin-top: -12%;
+  }
+  .content__item {
+    margin-top: 1%;
+  }
+  .link--carme {
+    font-size: 15px;
+  }
+
+  #hero {
+    padding-top: 12%;
+    height: 100vh;
+  }
+  .wrapper .line {
+    height: 100px;
+    margin-left: 2%;
+  }
+  .wrapper .line span {
+    position: absolute;
+    font-size: 15vh;
+    line-height: 6.7rem;
+  }
+  .wrapper #second_line {
+    margin-top: 2%;
+    margin-left: 0%;
+  }
+  .txt {
+    position: relative;
+    left: 50%;
+    margin-top: -15%;
+  }
+  .hero-intro p {
+    line-height: 1.4;
+    font-size: 2.5vh;
+    margin-top: 0%;
+    margin-bottom: 0%;
+  }
+  .hero-intro p span {
+    display: block;
+  }
+  .hero-intro #arrow {
+    width: 5%;
+    margin-top: 15%;
+    margin-left: 80%;
+    margin-bottom: 14%;
+  }
+  .hero-intro #dots {
+    width: 16%;
+  }
+
+  #about {
+    margin-top: 5%;
+  }
+  .about-intro {
+    margin: 3%;
+  }
+  .about-intro h1 {
+    font-size: 4.5vh;
+    margin-bottom: 15%;
+  }
+  .about-intro #apex_arrow {
+    display: none;
+  }
+  .about-intro p {
+    line-height: 1.4;
+    font-size: 2.5vh;
+  }
+
+  #ourBeliefs {
+    padding-top: 2%;
+    margin-top: 3%;
+    padding-bottom: 1px;
+  }
+  .ourBeliefs-intro {
+    margin: 3%;
+  }
+  .ourBeliefs-intro h1 {
+    font-size: 12vh;
+    margin-bottom: 0%;
+    line-height: 70px;
+  }
+  .ourBeliefs-intro h1 span {
+    margin-top: -1%;
+  }
+  .ourBeliefs-intro h1 mark {
+    font-size: 6vh;
+    padding: 1px 27px;
+    border-radius: 100px;
+  }
+  .ourBeliefs-intro h1 span {
+    display: block;
+  }
+  .ourBeliefs-intro #white_arrow {
+    width: 15%;
+    margin-left: 55%;
+  }
+  .ourBeliefs-intro h3 {
+    font-size: 2.3vh;
+    font-family: var(--style-font);
+    letter-spacing: 1px;
+    color: var(--bg-color);
+    margin-bottom: 2%;
+  }
+  .ourBeliefs-intro h3 span {
+    border-bottom: 1px solid var(--bg-color);
+  }
+  .ourBeliefs-intro p {
+    line-height: 1.4;
+    font-size: 2.5vh;
+  }
+  .ourBeliefs-intro #col {
+    margin-top: 5%;
+  }
+  .ourBeliefs-intro hr {
+    margin-top: 2%;
+  }
+
+  #partners {
+    margin-top: 6%;
+    margin-bottom: 5%;
+  }
+  .partners-intro {
+    margin: 3%;
+  }
+  .partners-intro h1 {
+    font-size: 8vh;
+    margin-bottom: 1%;
+  }
+  .partners-intro p {
+    font-size: 2.5vh;
+    margin-bottom: 3%;
+  }
+  .partners-intro .badge {
+    padding: 10px 30px;
+    font-size: 2.5vh;
+    letter-spacing: 1px;
+    margin-bottom: 5%;
+  }
+  #partners-pill {
+    margin-left: -5%;
+  }
+  #partners-pill_one {
+    margin-left: -3%;
+  }
+
+  #info {
+    margin-top: 8%;
+  }
+  .info-intro {
+    margin: 3%;
+  }
+  .info-intro h1 {
+    font-size: 9vh;
+    margin-bottom: 4%;
+    line-height: 1.1;
+  }
+  .info-intro h1 span {
+    display: block;
+  }
+
+  #footer {
+    margin-top: 6%;
+  }
+  .footer-intro {
+    margin: 3%;
+  }
+  .footer-intro p {
+    font-size: 1.7vh;
+    margin-bottom: 0%;
+  }
+  .footer-intro h3 small {
+    font-size: 1.6vh;
+    margin-bottom: 0%;
+    margin-top: -1%;
+    float: right;
+  }
+}
+/************************ Extra large devices (large desktops, 1200px and up) ********************************/
+@media (min-width: 1900px) {
+  .wrapper .line {
+    height: 132px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wrapper .line span {
+    font-size: 15vh;
+    line-height: 8.2rem;
+  }
+  .hero-intro #arrow {
+    margin-bottom: 14%;
+  }
+}
